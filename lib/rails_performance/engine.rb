@@ -25,7 +25,7 @@ module RailsPerformance
     initializer "rails_performance.middleware" do |app|
       next unless RailsPerformance.enabled
 
-      app.middleware.insert_after ActionDispatch::Executor, RailsPerformance::Rails::Middleware
+      app.middleware.insert_after ActionDispatch::RequestId, RailsPerformance::Rails::Middleware
       # look like it works in reverse order?
       app.middleware.insert_before RailsPerformance::Rails::Middleware, RailsPerformance::Rails::MiddlewareTraceStorerAndCleanup
 
