@@ -5,7 +5,6 @@ module RailsPerformance
         @data ||= db.data
           .collect { |e| e.record_hash }
           .group_by { |e| e[:server] + "///" + e[:context] + "///" + e[:role] }
-          # .transform_values { |v| v.sort { |a, b| b[sort] <=> a[sort] } }
           .transform_values { |v| v.map { |e| e.merge({datetimei: e[:datetimei].to_i}) } }
       end
 
